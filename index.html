@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+    <!--  ----------------------------------------------------------------------  -->
+    <!--  NOTA: Agregue el siguiente elemento <META> a su página <HEAD>.  Si es   -->
+    <!--  preciso, modifique el parámetro charset para especificar el conjunto    -->
+    <!--  de caracteres de su página HTML.                                        -->
+    <!--  ----------------------------------------------------------------------  -->
+
+
+    <!--  ----------------------------------------------------------------------  -->
+    <!--  NOTA: Agregue el siguiente elemento <FORM> a su página.                 -->
+    <!--  ----------------------------------------------------------------------  -->
+
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+
+        <input type=hidden name="orgid" value="00D6S00000044ZZ">
+        <input type=hidden name="retURL" value="https://www.google.com/">
+
+        <!--  ----------------------------------------------------------------------  -->
+        <!--  NOTA: Estos campos son elementos de depuración opcionales. Elimine      -->
+        <!--  los comentarios de estas líneas si desea realizar una prueba en el      -->
+        <!--  modo de depuración.                                                     -->
+        <!--  <input type="hidden" name="debug" value=1>                              -->
+        <!--  <input type="hidden" name="debugEmail"                                  -->
+        <!--  value="victor.castro@seidor.com">                                       -->
+        <!--  ----------------------------------------------------------------------  -->
+
+
+        <div style="display:flex; flex-direction: column; justify-content: center; align-items: center;"
+            class="container text-center">
+
+            <br>
+            <div class="container text-center">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <br><br>
+                        <!--<label for="name">Nombre del contacto</label>--><input id="name" maxlength="80" name="name"
+                            size="20" type="text" class="form-control" placeholder="Nombre del contacto" /><br>
+                    </div>
+                    <div class="col">
+                        <br><br>
+                        <!--<label for="email">Correo electrónico</label>--><input id="email" maxlength="80"
+                            name="email" size="20" type="text" class="form-control"
+                            placeholder="Correo electrónico" /><br>
+                    </div>
+                    <div class="col">
+                        <br>
+                        PDF2:<textarea id="00N6S00000LOOn4" name="00N6S00000LOOn4" rows="3" type="text" wrap="soft"
+                            class="form-control"></textarea><br>
+
+                        <input id="inputFile" type="file" class='form-control' onchange="convertToBase64();" />
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col">
+                        PDF3:<textarea id="00N6S00000LOOn9" name="00N6S00000LOOn9" rows="3" type="text" wrap="soft"
+                        class="form-control"></textarea><br>
+        
+                    <input id="inputFilePDF2" type="file" class='form-control' onchange="convertToBase64PDF2();" />
+        
+                    </div>
+                    <div class="col">
+                        PDF4:<textarea id="00N6S00000LOOnE" name="00N6S00000LOOnE" rows="3" type="text" wrap="soft"
+                        class="form-control"></textarea><br>
+        
+                        <input id="inputFilePDF3" type="file" class='form-control' onchange="convertToBase64PDF3();" />    
+                    </div>
+                    <div class="col">
+                        PDF5:<textarea id="00N6S00000LOOnJ" name="00N6S00000LOOnJ" rows="3" type="text" wrap="soft"
+                        class="form-control"></textarea><br>
+        
+                        <input id="inputFilePDF4" type="file" class='form-control' onchange="convertToBase64PDF4();" />
+        
+                    </div>
+                </div>
+                <div class="row align-items-end">
+                    <div class="col" style="visibility: hidden;">
+                        One of three columns
+                    </div>
+                    <div class="col">
+                        <br>
+                        <input type="submit" name="submit" class="btn btn-primary">
+                    </div>
+                    <div class="col" style="visibility: hidden;">
+                        One of three columns
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <iframe src="https://go.unbosque.edu.co/l/946263/2021-09-17/2qntcn" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>
+
+    <script type="text/javascript">
+
+        function convertToBase64() {
+            let texArea = document.getElementById('00N6S00000LOOn4')
+            //Read File
+            let selectedFile = document.getElementById("inputFile").files;
+            //Check File is not Empty
+            if (selectedFile.length > 0) {
+                // Select the very first file from list
+                let fileToLoad = selectedFile[0];
+                // FileReader function for read the file.
+                let fileReader = new FileReader();
+                let base64;
+                // Onload of file read the file content
+                fileReader.onload = function (fileLoadedEvent) {
+                    base64 = fileLoadedEvent.target.result;
+                    // Print data in console
+                    let base64Modificado = base64.substring(28, base64.length)
+                    console.log("BASE 64: " + base64.length)
+                    //textArea.value = base64           
+                    if (base64.length > 40000) {
+                        alert("No se puede guardar el PDF ya que su base64 es mayor a 40 mil caracteres")
+                    } else {
+                        texArea.value = base64Modificado;
+                    }
+                    console.log(texArea.value.length);
+                };
+                // Convert data to base64
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        }
+
+        function convertToBase64PDF2() {
+            let texArea = document.getElementById('00N6S00000LOOn9')
+            //Read File
+            let selectedFile = document.getElementById("inputFilePDF2").files;
+            //Check File is not Empty
+            if (selectedFile.length > 0) {
+                // Select the very first file from list
+                let fileToLoad = selectedFile[0];
+                // FileReader function for read the file.
+                let fileReader = new FileReader();
+                let base64;
+                // Onload of file read the file content
+                fileReader.onload = function (fileLoadedEvent) {
+                    base64 = fileLoadedEvent.target.result;
+                    // Print data in console                
+                    let base64Modificado = base64.substring(28, base64.length)
+                    console.log(base64)
+                    //textArea.value = base64
+                    if (base64.length > 40000) {
+                        alert("No se puede guardar el PDF ya que su base64 es mayor a 40 mil caracteres")
+                    } else {
+                        texArea.value = base64Modificado;
+                    }
+                    console.log(texArea.value.length);
+                };
+                // Convert data to base64
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        }
+
+        function convertToBase64PDF3() {
+            let texArea = document.getElementById('00N6S00000LOOnE')
+            //Read File
+            let selectedFile = document.getElementById("inputFilePDF3").files;
+            //Check File is not Empty
+            if (selectedFile.length > 0) {
+                // Select the very first file from list
+                let fileToLoad = selectedFile[0];
+                // FileReader function for read the file.
+                let fileReader = new FileReader();
+                let base64;
+                // Onload of file read the file content
+                fileReader.onload = function (fileLoadedEvent) {
+                    base64 = fileLoadedEvent.target.result;
+                    // Print data in console                
+                    let base64Modificado = base64.substring(28, base64.length)
+                    //textArea.value = base64
+                    if (base64.length > 40000) {
+                        alert("No se puede guardar el PDF ya que su base64 es mayor a 40 mil caracteres")
+                    } else {
+                        texArea.value = base64Modificado;
+                    }
+                    console.log(texArea.value.length);
+                };
+                // Convert data to base64
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        }
+
+        function convertToBase64PDF4() {
+            let texArea = document.getElementById('00N6S00000LOOnJ')
+            //Read File
+            let selectedFile = document.getElementById("inputFilePDF4").files;
+            //Check File is not Empty
+            if (selectedFile.length > 0) {
+                // Select the very first file from list
+                let fileToLoad = selectedFile[0];
+                // FileReader function for read the file.
+                let fileReader = new FileReader();
+                let base64;
+                // Onload of file read the file content
+                fileReader.onload = function (fileLoadedEvent) {
+                    base64 = fileLoadedEvent.target.result;
+                    // Print data in console                
+                    let base64Modificado = base64.substring(28, base64.length)
+                    console.log(base64)
+                    //textArea.value = base64
+                    if (base64.length > 40000) {
+                        alert("No se puede guardar el PDF ya que su base64 es mayor a 40 mil caracteres")
+                    } else {
+                        texArea.value = base64Modificado;
+                    }
+                    console.log(texArea.value.length);
+                };
+                // Convert data to base64
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
